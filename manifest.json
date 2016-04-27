@@ -1,0 +1,21 @@
+{
+  "name": "Tab Service",
+  "description": "Expose Tab service API to query browser tabs",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "Browser tabs",
+    "default_icon": "res/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/js/background.js"
+    ]
+  }
+}
