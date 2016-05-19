@@ -1,0 +1,67 @@
+body {
+  overflow: hidden;
+  background: white;
+  padding: 0;
+  margin: 0;
+}
+
+#tab-list {
+  max-height: 30rem;
+  overflow-y: auto;
+  width: 20rem;
+}
+
+.tab {
+  border: 0.1rem solid black;
+  padding: 0.1rem 0.5rem;
+  margin-bottom: 0.1rem;
+}
+
+.tab .row {
+  height: 1.75rem;
+  line-height: 1.5rem;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background-color: #ddf;
+}
+
+.tab .title-group {
+  float: left;
+}
+
+.title-group .title,
+.title-group .icon {
+  vertical-align: middle;
+}
+
+.title-group .icon {
+  margin-right: 0.5rem;
+}
+
+.tab .title {
+  display: inline-block;
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tab .close {
+  float: right;
+  display: inline-block;
+  width: 1rem;
+  text-align: center;
+}
+
+.tab .close:hover {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.tab .url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
