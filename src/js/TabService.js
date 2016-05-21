@@ -29,11 +29,11 @@
       });
 
       chrome.tabs.onRemoved.addListener(function (tabId) {
-        that.map.hasOwnProperty(tabId) && delete map[tabId];
+        that.map.hasOwnProperty(tabId) && delete that.map[tabId];
       });
 
       chrome.tabs.onReplaced.addListener(function (addedTabId, removedTabId) {
-        that.map.hasOwnProperty(removedTabId) && delete map[removedTabId];
+        that.map.hasOwnProperty(removedTabId) && delete that.map[removedTabId];
         chrome.tabs.get(addedTabId, function (tab) {
           that.map[tab.id] = tab;
         });
@@ -50,6 +50,11 @@
 
     getTab: function (tabId) {
       return this.map[tabId];
+    },
+
+    getTabUrl: function (tabId) {
+      var tab = this.getTab(tabId);
+      return tab && tab.url;
     },
 
     focusTab: function (tabId) {
