@@ -1,0 +1,10 @@
+{
+  "name": "tab-service",
+  "description": "Tab service to query any information about any tab",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/requestly/tab-service"
+  }
+}
