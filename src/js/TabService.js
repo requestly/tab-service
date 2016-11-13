@@ -1,5 +1,5 @@
 (function(window, chrome) {
-  var TabService = function () {
+  var TabService = function() {
     this.construct.apply(this, arguments);
   };
 
@@ -7,6 +7,7 @@
     construct: function() {
       this.map = {};
       this.initTabs();
+      this.registerBinders();
       this.addEventListeners();
     },
 
@@ -28,9 +29,7 @@
         that.map[tab.id] = tab;
       });
 
-      chrome.tabs.onRemoved.addListener(function (tabId) {
-        that.map.hasOwnProperty(tabId) && delete that.map[tabId];
-      });
+      this.addOnClosedListener(this.handleTabClosed);
 
       chrome.tabs.onReplaced.addListener(function (addedTabId, removedTabId) {
         that.map.hasOwnProperty(removedTabId) && delete that.map[removedTabId];
@@ -44,7 +43,11 @@
       });
     },
 
-    getTabs: function () {
+    registerBinders: function() {
+      this.handleTabClosed = this.handleTabClosed.bind(this);
+    },
+
+    getTabs: function() {
       return this.map;
     },
 
@@ -52,12 +55,12 @@
       return this.map[tabId];
     },
 
-    getTabUrl: function (tabId) {
+    getTabUrl: function(tabId) {
       var tab = this.getTab(tabId);
       return tab && tab.url;
     },
 
-    focusTab: function (tabId) {
+    focusTab: function(tabId) {
       var tab = this.map[tabId];
 
       chrome.windows.update(tab.windowId, { focused: true }, function() {
@@ -65,8 +68,20 @@
       });
     },
 
-    closeTab: function (tabId) {
+    closeTab: function(tabId) {
       chrome.tabs.remove(tabId);
+    },
+
+    handleTabClosed: function(tabId) {
+      this.map.hasOwnProperty(tabId) && delete this.map[tabId];
+    },
+
+    addOnClosedListener: function(listener) {
+      if (typeof listener !== 'function') {
+        console.error('Requestly Tab Service: Invalid listener passed as onClosedListener ', listener)
+      }
+
+      chrome.tabs.onRemoved.addListener(listener);
     }
   };
 
