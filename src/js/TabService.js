@@ -44,6 +44,7 @@
 
       chrome.webRequest.onBeforeRequest.addListener(function(details) {
         if (details.type === 'main_frame') {
+          that.map[details.tabId] = that.map[details.tabId] || {};
           that.map[details.tabId]['url'] = details.url;
         }
       }, { urls: ['<all_urls>'] });
