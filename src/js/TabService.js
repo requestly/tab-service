@@ -41,6 +41,12 @@
       chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         that.map[tabId] = tab;
       });
+
+      chrome.webRequest.onBeforeRequest.addListener(function(details) {
+        if (details.type === 'main_frame') {
+          that.map[details.tabId]['url'] = details.url;
+        }
+      }, { urls: ['<all_urls>'] });
     },
 
     registerBinders: function() {

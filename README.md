@@ -16,6 +16,16 @@ to run in background page of your extension, you need to instantiate the service
 var tabService = new TabService();
 ```
 
+```manifest permissions
+  webRequest
+  tabs
+  http://*/*
+  https://*/*
+  ... more such schemes
+```
+
+Check Issue #6 for explanation of webRequest permissions
+
 ### API Documentation
 The instance of service exposes following APIs:
 
