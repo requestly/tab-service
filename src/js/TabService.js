@@ -92,5 +92,5 @@
     }
   };
 
-  window.TabService = TabService;
+  window.tabService = new TabService();
 })(window, chrome);
