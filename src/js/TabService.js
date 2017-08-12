@@ -85,12 +85,15 @@
 
     addOnClosedListener: function(listener) {
       if (typeof listener !== 'function') {
-        console.error('Requestly Tab Service: Invalid listener passed as onClosedListener ', listener)
+        console.error('Chrome Tab Service: Invalid listener passed as onClosedListener ', listener)
       }
 
       chrome.tabs.onRemoved.addListener(listener);
     }
   };
 
-  window.tabService = new TabService();
+  // Create only single instance of TabService
+  if (typeof window.tabService === 'undefined') {
+    window.tabService = new TabService();
+  }
 })(window, chrome);
